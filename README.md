@@ -35,6 +35,7 @@ CREATE TABLE Students(
     student_name VARCHAR(64) NOT NULL ,
     student_sex ENUM('男', '女') NOT NULL ,
     student_age INT,
+    student_password VARCHAR(64) NOT NULL ,
     project_id INT # 可有可无，未加入|创建 项目时，为空。
 );
 ```
