@@ -45,7 +45,7 @@ CREATE TABLE Students(
 ```mysql
 CREATE TABLE Managers(
     manager_id INT PRIMARY KEY AUTO_INCREMENT,
-    manager_name VARCHAR(64) NOT NULL ,
-    manager_password VARCHAR(64) NOT NULL
-);
+      manager_name VARCHAR(64) NOT NULL ,
+      manager_password VARCHAR(64) NOT NULL
+  );
 ```
