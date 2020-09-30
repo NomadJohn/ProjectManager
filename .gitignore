@@ -1,2 +1,6 @@
 .idea
+ProjectManager.iml
 out
+.classpath
+.project
+*.jar
