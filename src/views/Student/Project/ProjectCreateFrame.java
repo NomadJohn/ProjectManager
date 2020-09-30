@@ -16,4 +16,6 @@ import javax.swing.*;
     项目描述：
  */
 public class ProjectCreateFrame extends JFrame {
+	public ProjectCreateFrame() {
+	}
 }

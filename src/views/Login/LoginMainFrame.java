@@ -16,23 +16,23 @@ public class LoginMainFrame extends JFrame {
     private JTextField tStudentName;
     private JPasswordField tStudentPassword;
 
-    public LoginMainFrame(int width, int height) {
+    public LoginMainFrame() {
         setTitle("登录");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, width, height);
+        setBounds(100, 100, 450, 339);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lbStudentName = new JLabel("\u59D3\u540D");
-        lbStudentName.setBounds(126, 68, 45, 18);
-        contentPane.add(lbStudentName);
+        JLabel lbName = new JLabel("\u59D3\u540D");
+        lbName.setBounds(126, 68, 45, 18);
+        contentPane.add(lbName);
 
-        JLabel lbStudentPassword = new JLabel("\u5BC6\u7801");
-        lbStudentPassword.setBounds(126, 111, 45, 18);
-        contentPane.add(lbStudentPassword);
+        JLabel lbPassword = new JLabel("\u5BC6\u7801");
+        lbPassword.setBounds(126, 111, 45, 18);
+        contentPane.add(lbPassword);
 
         tStudentName = new JTextField();
         tStudentName.setBounds(170, 65, 128, 24);
@@ -45,15 +45,24 @@ public class LoginMainFrame extends JFrame {
 
             }
         });
-        sumbitBtn.setBounds(169, 159, 113, 27);
+        sumbitBtn.setBounds(170, 217, 128, 27);
         contentPane.add(sumbitBtn);
 
         tStudentPassword = new JPasswordField();
         tStudentPassword.setBounds(170, 108, 128, 24);
         contentPane.add(tStudentPassword);
+        
+        JComboBox comboBox = new JComboBox();
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"学生", "管理员"}));
+        comboBox.setBounds(170, 157, 128, 24);
+        contentPane.add(comboBox);
+        
+        JLabel lbType = new JLabel("身份");
+        lbType.setBounds(126, 160, 45, 18);
+        contentPane.add(lbType);
     }
 
     public static void main(String[] args) {
-        new LoginMainFrame(450, 300).setVisible(true);
+        new LoginMainFrame().setVisible(true);
     }
 }
