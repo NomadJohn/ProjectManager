@@ -45,21 +45,31 @@ public class LoginMainFrame extends JFrame {
 
             }
         });
-        sumbitBtn.setBounds(170, 217, 128, 27);
+        sumbitBtn.setBounds(227, 217, 81, 27);
         contentPane.add(sumbitBtn);
 
         tStudentPassword = new JPasswordField();
         tStudentPassword.setBounds(170, 108, 128, 24);
         contentPane.add(tStudentPassword);
-        
+
         JComboBox comboBox = new JComboBox();
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"学生", "管理员"}));
         comboBox.setBounds(170, 157, 128, 24);
         contentPane.add(comboBox);
-        
+
         JLabel lbType = new JLabel("身份");
         lbType.setBounds(126, 160, 45, 18);
         contentPane.add(lbType);
+
+        JButton toRegisterBtn = new JButton("\u53BB\u6CE8\u518C");
+        toRegisterBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                LoginMainFrame.this.dispose();
+                new StudentRegisterFrame().setVisible(true);
+            }
+        });
+        toRegisterBtn.setBounds(136, 217, 81, 27);
+        contentPane.add(toRegisterBtn);
     }
 
     public static void main(String[] args) {

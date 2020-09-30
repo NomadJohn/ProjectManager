@@ -1,5 +1,6 @@
 package views.Login;
 
+import uitls.DBManager;
 import uitls.Utils;
 
 import javax.swing.*;
@@ -9,17 +10,18 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
 public class StudentRegisterFrame extends JFrame {
+
     private JPanel contentPane;
     private JTextField tStudentId;
     private JTextField tStudentName;
     private JTextField tStudentPassword;
     private JTextField tStudentPasswordConfirm;
 
-    public StudentRegisterFrame(int width, int height) {
+    public StudentRegisterFrame() {
         setTitle("注册");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, width, height);
+        setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -71,6 +73,7 @@ public class StudentRegisterFrame extends JFrame {
 
         JComboBox cStudentSex = new JComboBox();
         cStudentSex.setModel(new DefaultComboBoxModel(new String[] {"\u7537", "\u5973"}));
+        cStudentSex.setSelectedIndex(0);
         cStudentSex.setBounds(202, 84, 106, 24);
         contentPane.add(cStudentSex);
 
@@ -81,13 +84,40 @@ public class StudentRegisterFrame extends JFrame {
         JButton submintBtn = new JButton("\u6CE8\u518C");
         submintBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                String password = tStudentPassword.getText();
+                String passwordConfirm = tStudentPasswordConfirm.getText();
+                if (!password.equals(passwordConfirm)) {
+                    JOptionPane.showMessageDialog(StudentRegisterFrame.this, "两次输入的密码不一样");
+                    return;
+                }
 
+                if (DBManager.update(String.format("INSERT INTO Students(student_id, student_name, student_sex, student_age, student_password) VALUES(%d, '%s', '%s', %d, '%s')", Integer.valueOf(tStudentId.getText()), tStudentName.getText(), cStudentSex.getSelectedItem().toString().trim(), Integer.valueOf(tStudentAge.getText()), password)) > 0) {
+                    JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册成功");
+                    tStudentId.setText(null);
+                    tStudentName.setText(null);
+                    tStudentAge.setText(null);
+                    tStudentPassword.setText(null);
+                    tStudentPasswordConfirm.setText(null);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册失败");
             }
         });
-        submintBtn.setBounds(161, 217, 113, 27);
+        submintBtn.setBounds(226, 220, 82, 27);
         contentPane.add(submintBtn);
+
+        JButton toLoginBtn = new JButton("\u53BB\u767B\u5F55");
+        toLoginBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                StudentRegisterFrame.this.dispose();
+                new LoginMainFrame().setVisible(true);
+            }
+        });
+        toLoginBtn.setBounds(126, 220, 82, 27);
+        contentPane.add(toLoginBtn);
     }
     public static void main(String[] args) {
-        new StudentRegisterFrame(450, 300).setVisible(true);
+        new StudentRegisterFrame().setVisible(true);
     }
 }

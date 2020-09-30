@@ -12,9 +12,9 @@ import java.awt.*;
 如果是组长，显示加入申请审核列表
  */
 public class StudentFrame extends JFrame {
-    public StudentFrame(int width, int height) {
+    public StudentFrame() {
         this.setTitle("项目管理");
-        this.setSize(width, height);
+        this.setSize(790, 480);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -30,6 +30,6 @@ public class StudentFrame extends JFrame {
     }
 
     public static void main(String args[]) {
-        new StudentFrame(790, 480).setVisible(true);
+        new StudentFrame().setVisible(true);
     }
 }
