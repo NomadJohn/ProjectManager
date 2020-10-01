@@ -29,37 +29,43 @@ public class LoginMainFrame extends JPanel {
         contentPane = this;
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
+        setLayout(null);
 
         JLabel lbStudentID = new JLabel("学号");
-        lbStudentID.setBounds(126, 68, 45, 18);
+        lbStudentID.setFont(new Font("宋体", Font.PLAIN, 18));
+        lbStudentID.setBounds(119, 49, 45, 22);
         contentPane.add(lbStudentID);
 
         JLabel lbPassword = new JLabel("\u5BC6\u7801");
-        lbPassword.setBounds(126, 111, 45, 18);
+        lbPassword.setFont(new Font("宋体", Font.PLAIN, 18));
+        lbPassword.setBounds(119, 98, 45, 22);
         contentPane.add(lbPassword);
 
         tStudentID = new JTextField();
-        tStudentID.setBounds(170, 65, 128, 24);
+        tStudentID.setBounds(172, 50, 128, 24);
         contentPane.add(tStudentID);
         tStudentID.setColumns(10);
 
         JButton sumbitBtn = new JButton("\u767B\u5F55");
+        sumbitBtn.setFont(new Font("宋体", Font.PLAIN, 18));
 
-        sumbitBtn.setBounds(170, 220, 108, 27);
+        sumbitBtn.setBounds(172, 208, 108, 37);
         contentPane.add(sumbitBtn);
 
         tStudentPassword = new JPasswordField();
-        tStudentPassword.setBounds(170, 108, 128, 24);
+        tStudentPassword.setBounds(172, 96, 128, 24);
         contentPane.add(tStudentPassword);
 
         JComboBox comboBox = new JComboBox();
+        comboBox.setFont(new Font("宋体", Font.PLAIN, 18));
         comboBox.setModel(new DefaultComboBoxModel(new String[]{"学生", "管理员"}));
         comboBox.setSelectedIndex(0);
-        comboBox.setBounds(170, 157, 128, 24);
+        comboBox.setBounds(172, 145, 128, 24);
         contentPane.add(comboBox);
 
         JLabel lbType = new JLabel("身份");
-        lbType.setBounds(126, 160, 45, 18);
+        lbType.setFont(new Font("宋体", Font.PLAIN, 18));
+        lbType.setBounds(119, 147, 45, 22);
         contentPane.add(lbType);
 
         sumbitBtn.addActionListener(new ActionListener() {

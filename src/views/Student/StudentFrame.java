@@ -1,7 +1,7 @@
 package views.Student;
 
 import DTO.StudentDTO;
-import com.formdev.flatlaf.FlatLightLaf;
+//import com.formdev.flatlaf.FlatLightLaf;
 import views.Student.Project.ProjectCreateFrame;
 import views.Student.Project.ProjectJoinFrame;
 
@@ -21,7 +21,6 @@ public class StudentFrame extends JFrame {
         this.setSize(790, 480);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
         this.setContentPane(addProject());
     }
