@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StudentDAO implements Loginable {
-    public Component GetFrame(StudentDTO user) {
-        return new StudentFrame(user);
+    public Component GetFrame() {
+        return new StudentFrame();
     }
 
     public StudentDTO login(int StudentID, String StudentPassword) {

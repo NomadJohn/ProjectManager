@@ -8,6 +8,7 @@ package views.Login;
 import DAO.Loginable;
 import DAO.ManagerDAO;
 import DAO.StudentDAO;
+import DTO.ManagerDTO;
 import DTO.StudentDTO;
 import uitls.Utils;
 import views.Manager.ManagerFrame;
@@ -70,7 +71,6 @@ public class LoginMainFrame extends JPanel {
 
         sumbitBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                boolean success = false;
                 int type = comboBox.getSelectedIndex();
                 int id = Integer.parseInt(tStudentID.getText());
                 String password = tStudentPassword.getText();
@@ -80,7 +80,8 @@ public class LoginMainFrame extends JPanel {
                     JOptionPane.showMessageDialog(LoginMainFrame.this, "登录成功");
                     //登录成功后的处理
                     mainFrame.dispose();
-                    entity.GetFrame(userInfo).setVisible(true);
+                    Utils.SetUserInfo(userInfo);
+                    entity.GetFrame().setVisible(true);
                     return;
                 }
                 JOptionPane.showMessageDialog(LoginMainFrame.this, "登录失败");

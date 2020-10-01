@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ManagerDAO implements Loginable {
-    public Component GetFrame(StudentDTO user) {
-        return new ManagerFrame(user);
+    public Component GetFrame() {
+        return new ManagerFrame();
     }
 
     public StudentDTO login(int ManagerID, String ManagerPassword) {

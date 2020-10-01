@@ -6,6 +6,6 @@ import java.awt.*;
 
 public interface Loginable {
 //    public Component frame = null;
-    public Component GetFrame(StudentDTO user);
+    public Component GetFrame();
     public StudentDTO login(int a, String b);
 }

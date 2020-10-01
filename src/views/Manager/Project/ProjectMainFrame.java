@@ -1,30 +1,30 @@
 package views.Manager.Project;
 
+import views.Student.Project.ProjectCreateFrame;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class ProjectMainFrame extends JTabbedPane {
+public class ProjectMainFrame extends JPanel {
 
     public ProjectMainFrame() {
-//        addTab("管理", new JEditorPane());
+    	setLayout(new GridLayout(1, 0, 0, 0));
+    	
+    	JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+    	add(tabbedPane);
+    	
+    	JPanel create = new JPanel();
+    	tabbedPane.addTab("创建项目", null, create, null);
+    	create.setLayout(new GridLayout(1,0,0,0));
+		ProjectCreateFrame cf = new ProjectCreateFrame();
+		create.add(cf);
+    	
 
-//        查看详情，项目学生信息
-        JPanel listPanel = new ProjectListFrame();
-        JPanel createPanel = new ProjectCreateFrame();
-        addTab("项目列表", listPanel);
+    	
+    	JPanel list = new JPanel();
+    	tabbedPane.addTab("项目列表", null, list, null);
 
-//        创建空项目，暂时没人选题，学生和管理员均可创建
-        addTab("创建项目", createPanel);
-
-        setFont(new Font(null, Font.PLAIN, 24));
-
-        addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent changeEvent) {
-                System.out.println(getSelectedComponent());
-            }
-        });
     }
 }

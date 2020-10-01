@@ -1,22 +1,45 @@
 package views.Manager;
 
 import DTO.StudentDTO;
+import uitls.DBManager;
+import uitls.Utils;
 import views.Manager.Project.ProjectMainFrame;
+import views.Manager.Student.StudentMainFrame;
+import views.Manager.System.SystemMainFrame;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ManagerFrame extends JFrame {
-    Container c = this.getContentPane();
-    StudentDTO user = null;
-    public ManagerFrame(StudentDTO user) {
-        this.user = user;
-        System.out.println("MainFrame.MainFrame");
-        this.setSize(500, 500);
-        this.setTitle("项目管理系统");
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        c.setLayout(new GridLayout(1, 1));
-        initMenu();
+    StudentDTO userInfo = null;
+
+    public ManagerFrame() {
+        userInfo = Utils.GetUserInfo();
+        setSize(980, 600);
+        setTitle("项目管理系统");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+        tabbedPane.setBounds(0, 0, 482, 453);
+        getContentPane().add(tabbedPane);
+
+
+        JPanel project = new JPanel();
+        tabbedPane.addTab("项目", new ImageIcon("image//project_m.png"), project, null);
+        ProjectMainFrame projectMain = new ProjectMainFrame();
+        project.add(projectMain);
+        project.setLayout(new GridLayout(1, 0, 0, 0));
+
+
+        StudentMainFrame student = new StudentMainFrame();
+        tabbedPane.addTab("学生", new ImageIcon("image/student_m.png"), student, null);
+
+        SystemMainFrame system = new SystemMainFrame();
+        tabbedPane.addTab("系统", new ImageIcon("image/system_m.png"), system, null);
+        getContentPane().setLayout(new GridLayout(1, 1));
+//        initMenu();
     }
 
     void initMenu() {
@@ -43,14 +66,15 @@ public class ManagerFrame extends JFrame {
         mb.add(m2);
         mb.add(m3);
         this.setJMenuBar(mb);
+//
+    }
 
-        switchToComponent(new ProjectMainFrame());
-    }
     public void switchToComponent(Component cmp) {
-        c.removeAll();
-        c.add(cmp);
+        removeAll();
+        getContentPane().add(cmp);
     }
+
     public static void main(String[] args) {
-//        new ManagerFrame().setVisible(true);
+        new ManagerFrame().setVisible(true);
     }
 }

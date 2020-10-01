@@ -2,6 +2,7 @@ package views.Student;
 
 import DTO.StudentDTO;
 //import com.formdev.flatlaf.FlatLightLaf;
+import uitls.Utils;
 import views.Student.Project.ProjectCreateFrame;
 import views.Student.Project.ProjectJoinFrame;
 
@@ -14,9 +15,9 @@ import java.awt.*;
 如果是组长，显示加入申请审核列表
  */
 public class StudentFrame extends JFrame {
-    StudentDTO user = null;
-    public StudentFrame(StudentDTO user) {
-        this.user = user;
+    StudentDTO userInfo = null;
+    public StudentFrame() {
+        userInfo = Utils.GetUserInfo();
         this.setTitle("项目管理");
         this.setSize(790, 480);
         this.setLocationRelativeTo(null);
