@@ -1,5 +1,7 @@
 package views.Student;
 
+import DTO.StudentDTO;
+import com.formdev.flatlaf.FlatLightLaf;
 import views.Student.Project.ProjectCreateFrame;
 import views.Student.Project.ProjectJoinFrame;
 
@@ -12,7 +14,9 @@ import java.awt.*;
 如果是组长，显示加入申请审核列表
  */
 public class StudentFrame extends JFrame {
-    public StudentFrame() {
+    StudentDTO user = null;
+    public StudentFrame(StudentDTO user) {
+        this.user = user;
         this.setTitle("项目管理");
         this.setSize(790, 480);
         this.setLocationRelativeTo(null);
@@ -30,6 +34,7 @@ public class StudentFrame extends JFrame {
     }
 
     public static void main(String args[]) {
-        new StudentFrame().setVisible(true);
+//        FlatLightLaf.install();
+//        new StudentFrame().setVisible(true);
     }
 }

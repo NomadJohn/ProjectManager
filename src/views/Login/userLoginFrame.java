@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class userLoginFrame extends JFrame {
     public userLoginFrame() {
-        setTitle("登录&注册");
+        setTitle("身份验证");
         setSize( 450, 350);
         setResizable(false);
         setLocationRelativeTo(null);

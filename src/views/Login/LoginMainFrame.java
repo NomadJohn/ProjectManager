@@ -4,12 +4,18 @@ package views.Login;
 2、登录模式选择框（管理员，学生）
 3、登陆成功，按登录方式显示Manger 或 Student
  */
+
+import DAO.Loginable;
 import DAO.ManagerDAO;
 import DAO.StudentDAO;
+import DTO.StudentDTO;
 import uitls.Utils;
+import views.Manager.ManagerFrame;
+import views.Student.StudentFrame;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -47,7 +53,7 @@ public class LoginMainFrame extends JPanel {
         contentPane.add(tStudentPassword);
 
         JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"学生", "管理员"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[]{"学生", "管理员"}));
         comboBox.setSelectedIndex(0);
         comboBox.setBounds(170, 157, 128, 24);
         contentPane.add(comboBox);
@@ -58,17 +64,17 @@ public class LoginMainFrame extends JPanel {
 
         sumbitBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                boolean v  = false;
-                if (comboBox.getSelectedIndex() == 0) {
-                    v = new StudentDAO().login(Integer.valueOf(tStudentID.getText()), tStudentPassword.getText());
-                }else{
-                    v = new ManagerDAO().login(Integer.valueOf(tStudentID.getText()), tStudentPassword.getText());
-                }
-                if(v){
+                boolean success = false;
+                int type = comboBox.getSelectedIndex();
+                int id = Integer.parseInt(tStudentID.getText());
+                String password = tStudentPassword.getText();
+                Loginable entity = type == 0 ? new StudentDAO() : new ManagerDAO();
+                StudentDTO userInfo = entity.login(id, password);
+                if (userInfo != null) {
                     JOptionPane.showMessageDialog(LoginMainFrame.this, "登录成功");
                     //登录成功后的处理
-
                     mainFrame.dispose();
+                    entity.GetFrame(userInfo).setVisible(true);
                     return;
                 }
                 JOptionPane.showMessageDialog(LoginMainFrame.this, "登录失败");

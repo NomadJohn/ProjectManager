@@ -1,5 +1,6 @@
 package views.Manager;
 
+import DTO.StudentDTO;
 import views.Manager.Project.ProjectMainFrame;
 
 import javax.swing.*;
@@ -7,8 +8,9 @@ import java.awt.*;
 
 public class ManagerFrame extends JFrame {
     Container c = this.getContentPane();
-
-    ManagerFrame() {
+    StudentDTO user = null;
+    public ManagerFrame(StudentDTO user) {
+        this.user = user;
         System.out.println("MainFrame.MainFrame");
         this.setSize(500, 500);
         this.setTitle("项目管理系统");
@@ -49,6 +51,6 @@ public class ManagerFrame extends JFrame {
         c.add(cmp);
     }
     public static void main(String[] args) {
-        new ManagerFrame().setVisible(true);
+//        new ManagerFrame().setVisible(true);
     }
 }
