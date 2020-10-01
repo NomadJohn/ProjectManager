@@ -21,4 +21,9 @@ public class StudentDAO implements Loginable {
             student = new StudentDTO(StudentID, result.get(0).get("student_name"), result.get(0).get("student_sex"),Integer.parseInt(result.get(0).get("student_age")), result.get(0).get("student_password"));
         return student;
     }
+
+    public boolean register(StudentDTO stu) {
+        int result = DBManager.update(String.format("INSERT INTO Students(student_id, student_name, student_sex, student_age, student_password) VALUES(%d, '%s', '%s', %d, '%s')", stu.getId(), stu.getName(), stu.getSex(), stu.getAge(), stu.getPassword()));
+        return result > 0;
+    }
 }

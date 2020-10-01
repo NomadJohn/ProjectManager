@@ -9,12 +9,9 @@ public class ProjectDTO {
     private LocalTime begin;
     private LocalTime end;
 
-    public ProjectDTO(int id, String name, String desc, LocalTime begin, LocalTime end) {
-        this.id = id;
+    public ProjectDTO(String name, String desc) {
         this.name = name;
         this.desc = desc;
-        this.begin = begin;
-        this.end = end;
     }
 
     public String getId() {

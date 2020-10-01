@@ -1,9 +1,15 @@
 package views.Student.Project;
 
+import DAO.FunctionDAO;
+import DAO.ProjectDAO;
+import DTO.FunctionDTO;
+import DTO.ProjectDTO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 
 /*
 数据库字段：
@@ -21,6 +27,7 @@ import java.awt.event.ActionListener;
 public class ProjectCreateFrame extends JPanel {
     private JTextField tProjectName;
     private JTextField tProjectFunction;
+    private JTable table;
 
     /**
      * Create the panel.
@@ -38,7 +45,7 @@ public class ProjectCreateFrame extends JPanel {
         tProjectName.setColumns(10);
 
         JLabel lbProjectFunction = new JLabel("\u9879\u76EE\u529F\u80FD");
-        lbProjectFunction.setBounds(441, 13, 72, 18);
+        lbProjectFunction.setBounds(441, 13, 63, 18);
         add(lbProjectFunction);
 
         JLabel lbProjectDesc = new JLabel("\u9879\u76EE\u63CF\u8FF0");
@@ -53,29 +60,72 @@ public class ProjectCreateFrame extends JPanel {
         scrollPane.setViewportView(tProjectDesc);
 
         tProjectFunction = new JTextField();
-        tProjectFunction.setBounds(523, 10, 147, 24);
+        tProjectFunction.setBounds(507, 10, 129, 24);
         add(tProjectFunction);
         tProjectFunction.setColumns(10);
+        
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(441, 44, 322, 252);
+        add(scrollPane_1);
+        
+        table = new JTable();
+        scrollPane_1.setViewportView(table);
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[][] {
+            },
+            new String[] {
+                    "项目功能"
+            }
+        );
+        table.setModel(model);
 
         JButton addFunctionBtn = new JButton("\u6DFB\u52A0");
-        addFunctionBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
+        addFunctionBtn.addActionListener(arg0 -> {
+            Object[] obj = {tProjectFunction.getText()};
+            model.addRow(obj);
         });
-        addFunctionBtn.setBounds(684, 9, 72, 27);
+        addFunctionBtn.setBounds(650, 9, 63, 27);
         add(addFunctionBtn);
 
-        JScrollPane spFunctionList = new JScrollPane();
-//        spFunctionList.setLayout(new FlowLayout());
-        spFunctionList.setBounds(429, 49, 335, 250);
-        add(spFunctionList);
-
         JButton submitBtn = new JButton("\u521B\u5EFA\u9879\u76EE");
-        submitBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        submitBtn.addActionListener(e -> {
+            int project_id = new ProjectDAO().insert(new ProjectDTO(tProjectName.getText(), tProjectDesc.getText()));
+            if (project_id <= 0) {
+                JOptionPane.showMessageDialog(ProjectCreateFrame.this, "创建项目失败");
+                return ;
+            }
+
+            int functionCount = model.getRowCount();
+            FunctionDTO[] functions = new FunctionDTO[functionCount];
+            for (int i = 0; i < functionCount; i++) {
+                functions[i] = new FunctionDTO((String)model.getValueAt(i, 0), project_id);
+            }
+
+            if (!new FunctionDAO().insertMore(functions)) {
+                JOptionPane.showMessageDialog(ProjectCreateFrame.this, "插入功能失败");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(ProjectCreateFrame.this, "创建项目成功");
+            tProjectName.setText(null);
+            tProjectDesc.setText(null);
+            tProjectFunction.setText(null);
+            for (int i = functionCount-1; i >=0 ; i--) {
+                model.removeRow(i);
             }
         });
         submitBtn.setBounds(329, 357, 113, 27);
         add(submitBtn);
+        
+        JButton delFunctionBtn = new JButton("删除");
+        delFunctionBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+                int[] indexs = table.getSelectedRows();
+                for (int i = indexs.length-1; i>=0; i--)
+                    model.removeRow(indexs[i]);
+        	}
+        });
+        delFunctionBtn.setBounds(713, 9, 63, 27);
+        add(delFunctionBtn);
     }
 }

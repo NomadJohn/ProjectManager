@@ -1,5 +1,7 @@
 package views.Login;
 
+import DAO.StudentDAO;
+import DTO.StudentDTO;
 import uitls.DBManager;
 import uitls.Utils;
 
@@ -60,7 +62,7 @@ public class StudentRegisterFrame extends JPanel {
         lbStudentPassword.setBounds(116, 149, 42, 21);
         contentPane.add(lbStudentPassword);
 
-        tStudentPassword = new JTextField();
+        tStudentPassword = new JPasswordField();
         tStudentPassword.setColumns(10);
         tStudentPassword.setBounds(202, 149, 106, 24);
         contentPane.add(tStudentPassword);
@@ -70,7 +72,7 @@ public class StudentRegisterFrame extends JPanel {
         lbStudentPasswordConfirm.setBounds(116, 183, 72, 21);
         contentPane.add(lbStudentPasswordConfirm);
 
-        tStudentPasswordConfirm = new JTextField();
+        tStudentPasswordConfirm = new JPasswordField();
         tStudentPasswordConfirm.setColumns(10);
         tStudentPasswordConfirm.setBounds(202, 183, 106, 24);
         contentPane.add(tStudentPasswordConfirm);
@@ -88,31 +90,33 @@ public class StudentRegisterFrame extends JPanel {
 
         JButton submintBtn = new JButton("\u6CE8\u518C");
         submintBtn.setFont(new Font("宋体", Font.PLAIN, 18));
-        submintBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                String password = tStudentPassword.getText();
-                String passwordConfirm = tStudentPasswordConfirm.getText();
-                if (!password.equals(passwordConfirm)) {
-                    JOptionPane.showMessageDialog(StudentRegisterFrame.this, "两次输入的密码不一样");
-                    return;
-                }
+        submintBtn.addActionListener(arg0 -> {
+            int studentId = Integer.parseInt(tStudentId.getText());
+            String studentName = tStudentName.getText();
+            String password = tStudentPassword.getText();
+            String studentSex = cStudentSex.getSelectedItem().toString().trim();
+            int studentAge = Integer.parseInt(tStudentAge.getText());
+            String passwordConfirm = tStudentPasswordConfirm.getText();
 
-                if (DBManager.update(String.format("INSERT INTO Students(student_id, student_name, student_sex, student_age, student_password) VALUES(%d, '%s', '%s', %d, '%s')", Integer.valueOf(tStudentId.getText()), tStudentName.getText(), cStudentSex.getSelectedItem().toString().trim(), Integer.valueOf(tStudentAge.getText()), password)) > 0) {
-                    JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册成功");
-                    tStudentId.setText(null);
-                    tStudentName.setText(null);
-                    tStudentAge.setText(null);
-                    tStudentPassword.setText(null);
-                    tStudentPasswordConfirm.setText(null);
-                    return;
-                }
-
-                JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册失败");
+            if (!password.equals(passwordConfirm)) {
+                JOptionPane.showMessageDialog(StudentRegisterFrame.this, "两次输入的密码不一致");
+                return;
             }
+
+            if (studentId != 0 && studentName != "" && new StudentDAO().register(new StudentDTO(studentId, studentName, studentSex, studentAge, password))) {
+                JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册成功");
+                tStudentId.setText(null);
+                tStudentName.setText(null);
+                tStudentAge.setText(null);
+                tStudentPassword.setText(null);
+                tStudentPasswordConfirm.setText(null);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册失败");
         });
         submintBtn.setBounds(168, 220, 100, 35);
         contentPane.add(submintBtn);
-
     }
     public static void main(String[] args) {
         new StudentRegisterFrame().setVisible(true);

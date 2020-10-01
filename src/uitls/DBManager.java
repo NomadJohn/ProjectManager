@@ -59,6 +59,21 @@ public class DBManager {
         return affectedRowCount;
     }
 
+    public static int updateCallId(String sql) {
+        int id = 0;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt.executeUpdate();
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     public static void close() {
         try {
             conn.close();
