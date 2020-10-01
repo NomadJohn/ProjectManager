@@ -46,6 +46,7 @@ public class ProjectJoinFrame extends JPanel {
                     jtp.setEnabledAt(0, false);
                     jtp.setEnabledAt(1, false);
                     jtp.setEnabledAt(2, true);
+                    jtp.setSelectedIndex(2);
                     return;
                 }
                 JOptionPane.showMessageDialog(ProjectJoinFrame.this, "加入失败");

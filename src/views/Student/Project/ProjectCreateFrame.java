@@ -55,7 +55,7 @@ public class ProjectCreateFrame extends JPanel {
         add(lbProjectDesc);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(96, 47, 319, 252);
+        scrollPane.setBounds(96, 47, 319, 277);
         add(scrollPane);
 
         JTextArea tProjectDesc = new JTextArea();
@@ -67,7 +67,7 @@ public class ProjectCreateFrame extends JPanel {
         tProjectFunction.setColumns(10);
         
         JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(441, 84, 322, 212);
+        scrollPane_1.setBounds(441, 84, 322, 240);
         add(scrollPane_1);
         
         table = new JTable();
@@ -120,7 +120,7 @@ public class ProjectCreateFrame extends JPanel {
                 model.removeRow(i);
             }
         });
-        submitBtn.setBounds(329, 357, 113, 27);
+        submitBtn.setBounds(340, 360, 113, 27);
         add(submitBtn);
         
         JButton delFunctionBtn = new JButton("删除");

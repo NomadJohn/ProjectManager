@@ -27,7 +27,8 @@ public class FunctionDAO {
             int fid = Integer.parseInt(result.get(i).get("function_id"));
             System.out.println(result.get(i).get("function_id"));
             String fName = result.get(i).get("function_name");
-            functions.add(new FunctionDTO(fid, fName, pid));
+            String isCompleted = result.get(i).get("is_completed");
+            functions.add(new FunctionDTO(fid, fName, pid, isCompleted));
         }
         return functions;
     }
@@ -39,5 +40,10 @@ public class FunctionDAO {
             str += f.getName() + "、";
         }
         return str;
+    }
+
+    public boolean setIsCompletedFunction(int function_id, int isCompleted) {
+        String sql = String.format("UPDATE Functions SET is_completed = '%d' WHERE function_id = %d;", isCompleted, function_id );
+        return DBManager.update(sql) > 0;
     }
 }

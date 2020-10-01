@@ -29,6 +29,7 @@ public class StudentFrame extends JFrame {
 
     private JTabbedPane addProject() {
         JTabbedPane jtp = new JTabbedPane();
+        jtp.setFont(new Font("宋体", Font.PLAIN, 18));
         jtp.add("创建项目", new ProjectCreateFrame());
         jtp.add("加入项目", new ProjectJoinFrame(jtp));
         jtp.add("项目进度", new ProgressManageFrame());
