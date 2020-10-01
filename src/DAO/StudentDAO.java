@@ -34,4 +34,8 @@ public class StudentDAO implements Loginable {
         String sql = String.format("UPDATE Students SET project_id = %d WHERE student_id = %d", ProjectId, StudentId);
         return DBManager.update(sql) > 0;
     }
+    public boolean deleteOne(int studentId) {
+        int result = DBManager.update(String.format("DELETE FROM Students WHERE student_id = %s", studentId));
+        return result > 0;
+    }
 }
