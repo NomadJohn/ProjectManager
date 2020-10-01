@@ -77,7 +77,7 @@ public class LoginMainFrame extends JPanel {
                 Loginable entity = type == 0 ? new StudentDAO() : new ManagerDAO();
                 StudentDTO userInfo = entity.login(id, password);
                 if (userInfo != null) {
-                    JOptionPane.showMessageDialog(LoginMainFrame.this, "登录成功");
+//                    JOptionPane.showMessageDialog(LoginMainFrame.this, "登录成功");
                     //登录成功后的处理
                     mainFrame.dispose();
                     Utils.SetUserInfo(userInfo);

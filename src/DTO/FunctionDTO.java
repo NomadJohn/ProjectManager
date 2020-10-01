@@ -10,6 +10,12 @@ public class FunctionDTO {
         this.projectId = projectId;
     }
 
+    public FunctionDTO(int id, String name, int projectId) {
+        this.id = id;
+        this.name = name;
+        this.projectId = projectId;
+    }
+
     public int getId() {
         return id;
     }

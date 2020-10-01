@@ -3,6 +3,7 @@ package views.Student;
 import DTO.StudentDTO;
 //import com.formdev.flatlaf.FlatLightLaf;
 import uitls.Utils;
+import views.Student.Progress.ProgressManageFrame;
 import views.Student.Project.ProjectCreateFrame;
 import views.Student.Project.ProjectJoinFrame;
 
@@ -30,6 +31,14 @@ public class StudentFrame extends JFrame {
         JTabbedPane jtp = new JTabbedPane();
         jtp.add("创建项目", new ProjectCreateFrame());
         jtp.add("加入项目", new ProjectJoinFrame(jtp));
+        jtp.add("项目进度", new ProgressManageFrame());
+        if (Utils.GetUserInfo().getProjectId() != 0) {
+            jtp.setEnabledAt(0, false);
+            jtp.setEnabledAt(1, false);
+            jtp.setSelectedIndex(2);
+        }else {
+            jtp.setEnabledAt(2, false);
+        }
         return jtp;
     }
 

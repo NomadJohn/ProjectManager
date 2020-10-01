@@ -103,7 +103,7 @@ public class StudentRegisterFrame extends JPanel {
                 return;
             }
 
-            if (studentId != 0 && studentName != "" && new StudentDAO().register(new StudentDTO(studentId, studentName, studentSex, studentAge, password))) {
+            if (studentId != 0 && studentName != "" && new StudentDAO().register(new StudentDTO(studentId, studentName, studentSex, studentAge, password, 0))) {
                 JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册成功");
                 tStudentId.setText(null);
                 tStudentName.setText(null);

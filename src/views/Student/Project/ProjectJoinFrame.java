@@ -1,5 +1,6 @@
 package views.Student.Project;
 
+import DAO.FunctionDAO;
 import DAO.ProjectDAO;
 import DAO.StudentDAO;
 import DTO.ProjectDTO;
@@ -28,6 +29,7 @@ public class ProjectJoinFrame extends JPanel {
     private JTable tProjectList;
     private JTextField tSearch;
     DefaultTableModel model;
+    ArrayList<ProjectDTO> projects;
     /**
      * Create the panel.
      */
@@ -43,6 +45,7 @@ public class ProjectJoinFrame extends JPanel {
                     JOptionPane.showMessageDialog(ProjectJoinFrame.this, "加入成功");
                     jtp.setEnabledAt(0, false);
                     jtp.setEnabledAt(1, false);
+                    jtp.setEnabledAt(2, true);
                     return;
                 }
                 JOptionPane.showMessageDialog(ProjectJoinFrame.this, "加入失败");
@@ -87,7 +90,7 @@ public class ProjectJoinFrame extends JPanel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 if(mouseEvent.getClickCount() == 2) {
-                    infoFrame().setVisible(true);
+                    infoFrame(projects.get(tProjectList.getSelectedRow())).setVisible(true);
                 }
             }
 
@@ -118,7 +121,7 @@ public class ProjectJoinFrame extends JPanel {
     }
 
     public void loadProject() {
-        ArrayList<ProjectDTO> projects = new ProjectDAO().queryAll();
+        projects = new ProjectDAO().queryAll();
         for (ProjectDTO p: projects) {
             Object[] obj = {p.getId(), p.getName(), p.getDesc(), p.getBegin(), p.getEnd() == null ? "未完成" : "已完成"};
             model.addRow(obj);
@@ -130,9 +133,9 @@ public class ProjectJoinFrame extends JPanel {
         loadProject();
     }
 
-    private JFrame infoFrame() {
+    private JFrame infoFrame(ProjectDTO project) {
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(100, 100, 594, 383);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -177,6 +180,12 @@ public class ProjectJoinFrame extends JPanel {
         lbProjectName.setBounds(105, 13, 353, 18);
         contentPane.add(lbProjectName);
         frame.setContentPane(contentPane);
+
+        lbProjectName.setText(project.getName());
+        lbProjectBegin.setText(project.getBegin().toString());
+        tProjectDesc.setText(project.getDesc());
+        tProjectFunction.setText(new FunctionDAO().queryByProjectIdToString(Integer.parseInt(project.getId())));
+
         return frame;
     }
 }

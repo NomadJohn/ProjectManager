@@ -19,7 +19,7 @@ public class ManagerDAO implements Loginable {
         StudentDTO manager = null;
         ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Managers WHERE manager_id = %d AND manager_password = '%s'", ManagerID, ManagerPassword));
         if (result.size() > 0)
-            manager = new StudentDTO(ManagerID,result.get(0).get("manager_name"),"",0, result.get(0).get("manager_password"));
+            manager = new StudentDTO(ManagerID,result.get(0).get("manager_name"),"",0, result.get(0).get("manager_password"), 0);
         return manager;
     }
 }

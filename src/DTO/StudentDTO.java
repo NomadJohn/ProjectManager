@@ -6,13 +6,23 @@ public class StudentDTO {
     private String sex;
     private int age;
     private String password;
+    private int projectId;
 
-    public StudentDTO(int id, String name, String sex, int age, String password) {
+    public StudentDTO(int id, String name, String sex, int age, String password, int projectId) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.password = password;
+        this.projectId = projectId;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public int getId() {
