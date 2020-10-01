@@ -5,9 +5,6 @@ import DTO.FunctionDTO;
 import uitls.Utils;
 
 import javax.swing.*;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -71,20 +68,14 @@ public class ProgressManageFrame extends JPanel {
 		
 		JButton button = new JButton("<-移至已完成");
 		button.addActionListener(e -> {
-			int functionId = (int)inCompletedModel.getValueAt(table_1.getSelectedRow(), 0);
-			boolean success = FuncDAO.setIsCompletedFunction(functionId, 1);
-			if (success)
-				reloadFunctions();
+			changeCompleted(table_1, inCompletedModel, 1);
 		});
 		button.setBounds(325, 173, 126, 27);
 		add(button);
 		
 		JButton button_1 = new JButton("移至未完成->");
 		button_1.addActionListener(arg0 -> {
-			int functionId = (int)completedModel.getValueAt(table.getSelectedRow(), 0);
-			boolean success = FuncDAO.setIsCompletedFunction(functionId, 0);
-			if (success)
-				reloadFunctions();
+			changeCompleted(table, completedModel, 0);
 		});
 		button_1.setBounds(325, 242, 126, 27);
 		add(button_1);
@@ -130,5 +121,15 @@ public class ProgressManageFrame extends JPanel {
 
 		table.getTableHeader().getColumnModel().getColumn(index).setMaxWidth(0);
 		table.getTableHeader().getColumnModel().getColumn(index).setMinWidth(0);
+	}
+
+	private void changeCompleted(JTable table, DefaultTableModel model, int isCompleted) {
+		int row = table.getSelectedRow();
+		if (row > -1) {
+			int functionId = (int)model.getValueAt(row, 0);
+			boolean success = FuncDAO.setIsCompletedFunction(functionId, isCompleted);
+			if (success)
+				reloadFunctions();
+		}
 	}
 }
