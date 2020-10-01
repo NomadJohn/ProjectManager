@@ -1,6 +1,7 @@
 package views.Manager;
 
 import DTO.StudentDTO;
+import com.formdev.flatlaf.FlatLightLaf;
 import uitls.DBManager;
 import uitls.Utils;
 import views.Manager.Project.ProjectMainFrame;
@@ -39,6 +40,30 @@ public class ManagerFrame extends JFrame {
         SystemMainFrame system = new SystemMainFrame();
         tabbedPane.addTab("系统", new ImageIcon("image/system_m.png"), system, null);
         getContentPane().setLayout(new GridLayout(1, 1));
+
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu mns = new JMenu("系统(S)");
+        menuBar.add(mns);
+
+        JMenuItem menuItem_3 = new JMenuItem("学生管理");
+        mns.add(menuItem_3);
+
+        JMenuItem menuItem_2 = new JMenuItem("项目管理");
+        mns.add(menuItem_2);
+
+        JMenuItem menuItem_4 = new JMenuItem("系统信息");
+        mns.add(menuItem_4);
+
+        JMenu mnh = new JMenu("帮助(H)");
+        menuBar.add(mnh);
+
+        JMenuItem menuItem_1 = new JMenuItem("退出系统");
+        mnh.add(menuItem_1);
+
+        JMenuItem menuItem = new JMenuItem("关于");
+        mnh.add(menuItem);
 //        initMenu();
     }
 
@@ -75,6 +100,7 @@ public class ManagerFrame extends JFrame {
     }
 
     public static void main(String[] args) {
+        FlatLightLaf.install();
         new ManagerFrame().setVisible(true);
     }
 }
