@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ManagerDAO {
-    public boolean login(String ManagerName, String ManagerPassword) {
-        ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM managers WHERE manager_name = '%s' AND manager_password = '%s'", ManagerName, ManagerPassword));
+    public boolean login(int ManagerID, String ManagerPassword) {
+        ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Managers WHERE manager_id = %d AND manager_password = '%s'", ManagerID, ManagerPassword));
         if (result.size() > 0)
             return true;
         return false;

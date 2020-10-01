@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
-public class StudentRegisterFrame extends JFrame {
+public class StudentRegisterFrame extends JPanel {
 
     private JPanel contentPane;
     private JTextField tStudentId;
@@ -18,13 +18,9 @@ public class StudentRegisterFrame extends JFrame {
     private JTextField tStudentPasswordConfirm;
 
     public StudentRegisterFrame() {
-        setTitle("注册");
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
+        contentPane = this;
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JLabel lbStudentId = new JLabel("\u5B66\u53F7");
@@ -104,18 +100,9 @@ public class StudentRegisterFrame extends JFrame {
                 JOptionPane.showMessageDialog(StudentRegisterFrame.this, "注册失败");
             }
         });
-        submintBtn.setBounds(226, 220, 82, 27);
+        submintBtn.setBounds(180, 220, 100, 27);
         contentPane.add(submintBtn);
 
-        JButton toLoginBtn = new JButton("\u53BB\u767B\u5F55");
-        toLoginBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                StudentRegisterFrame.this.dispose();
-                new LoginMainFrame().setVisible(true);
-            }
-        });
-        toLoginBtn.setBounds(126, 220, 82, 27);
-        contentPane.add(toLoginBtn);
     }
     public static void main(String[] args) {
         new StudentRegisterFrame().setVisible(true);

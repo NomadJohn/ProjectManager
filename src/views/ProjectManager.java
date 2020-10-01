@@ -3,12 +3,11 @@ package views;
     入口类
  */
 
-import views.Login.LoginMainFrame;
-
+import views.Login.userLoginFrame;
 
 
 public class ProjectManager {
     public static void main(String[] args) {
-        new LoginMainFrame().setVisible(true);
+        new userLoginFrame().setVisible(true);
     }
 }
