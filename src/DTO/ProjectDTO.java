@@ -1,17 +1,26 @@
 package DTO;
 
-import java.time.LocalTime;
+import java.sql.Timestamp;
 
 public class ProjectDTO {
     private int id;
     private String name;
     private String desc;
-    private LocalTime begin;
-    private LocalTime end;
+    private Timestamp begin;
+    private Timestamp end;
 
-    public ProjectDTO(String name, String desc) {
+    public ProjectDTO(String name, String desc, Timestamp begin) {
         this.name = name;
         this.desc = desc;
+        this.begin = begin;
+    }
+
+    public ProjectDTO(int id, String name, String desc, Timestamp begin, Timestamp end) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.begin = begin;
+        this.end = end;
     }
 
     public String getId() {
@@ -38,19 +47,19 @@ public class ProjectDTO {
         this.desc = desc;
     }
 
-    public LocalTime getBegin() {
+    public Timestamp getBegin() {
         return begin;
     }
 
-    public void setBegin(LocalTime begin) {
+    public void setBegin(Timestamp begin) {
         this.begin = begin;
     }
 
-    public LocalTime getEnd() {
+    public Timestamp getEnd() {
         return end;
     }
 
-    public void setEnd(LocalTime end) {
+    public void setEnd(Timestamp end) {
         this.end = end;
     }
 

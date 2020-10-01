@@ -26,4 +26,9 @@ public class StudentDAO implements Loginable {
         int result = DBManager.update(String.format("INSERT INTO Students(student_id, student_name, student_sex, student_age, student_password) VALUES(%d, '%s', '%s', %d, '%s')", stu.getId(), stu.getName(), stu.getSex(), stu.getAge(), stu.getPassword()));
         return result > 0;
     }
+
+    public boolean joinProject(int StudentId, int ProjectId) {
+        String sql = String.format("UPDATE Students SET project_id = %d WHERE student_id = %d", ProjectId, StudentId);
+        return DBManager.update(sql) > 0;
+    }
 }

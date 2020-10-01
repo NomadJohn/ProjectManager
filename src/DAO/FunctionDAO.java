@@ -10,7 +10,6 @@ public class FunctionDAO {
             sql += String.format("(%d,'%s'),", f.getProjectId(), f.getName());
         }
         sql = sql.substring(0,sql.length()-1);
-        System.out.println(sql);
         return DBManager.update(sql) > 0;
     }
 }

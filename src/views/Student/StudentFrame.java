@@ -19,7 +19,7 @@ public class StudentFrame extends JFrame {
     public StudentFrame() {
         userInfo = Utils.GetUserInfo();
         this.setTitle("项目管理");
-        this.setSize(790, 480);
+        this.setSize(810, 480);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -29,12 +29,12 @@ public class StudentFrame extends JFrame {
     private JTabbedPane addProject() {
         JTabbedPane jtp = new JTabbedPane();
         jtp.add("创建项目", new ProjectCreateFrame());
-        jtp.add("加入项目", new ProjectJoinFrame());
+        jtp.add("加入项目", new ProjectJoinFrame(jtp));
         return jtp;
     }
 
     public static void main(String args[]) {
 //        FlatLightLaf.install();
-//        new StudentFrame().setVisible(true);
+        new StudentFrame().setVisible(true);
     }
 }

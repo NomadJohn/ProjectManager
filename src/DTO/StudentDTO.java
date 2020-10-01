@@ -15,8 +15,8 @@ public class StudentDTO {
         this.password = password;
     }
 
-    public String getId() {
-        return String.valueOf(id);
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {

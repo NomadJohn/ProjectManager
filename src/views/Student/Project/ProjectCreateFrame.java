@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -60,12 +62,12 @@ public class ProjectCreateFrame extends JPanel {
         scrollPane.setViewportView(tProjectDesc);
 
         tProjectFunction = new JTextField();
-        tProjectFunction.setBounds(507, 10, 129, 24);
+        tProjectFunction.setBounds(507, 10, 256, 24);
         add(tProjectFunction);
         tProjectFunction.setColumns(10);
         
         JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(441, 44, 322, 252);
+        scrollPane_1.setBounds(441, 84, 322, 212);
         add(scrollPane_1);
         
         table = new JTable();
@@ -81,15 +83,19 @@ public class ProjectCreateFrame extends JPanel {
 
         JButton addFunctionBtn = new JButton("\u6DFB\u52A0");
         addFunctionBtn.addActionListener(arg0 -> {
-            Object[] obj = {tProjectFunction.getText()};
-            model.addRow(obj);
+            String functionName = tProjectFunction.getText();
+            if (!functionName.equals("")) {
+                Object[] obj = {functionName};
+                model.addRow(obj);
+                tProjectFunction.setText(null);
+            }
         });
-        addFunctionBtn.setBounds(650, 9, 63, 27);
+        addFunctionBtn.setBounds(507, 46, 98, 27);
         add(addFunctionBtn);
 
         JButton submitBtn = new JButton("\u521B\u5EFA\u9879\u76EE");
         submitBtn.addActionListener(e -> {
-            int project_id = new ProjectDAO().insert(new ProjectDTO(tProjectName.getText(), tProjectDesc.getText()));
+            int project_id = new ProjectDAO().insert(new ProjectDTO(tProjectName.getText(), tProjectDesc.getText(), Timestamp.valueOf(LocalDateTime.now())));
             if (project_id <= 0) {
                 JOptionPane.showMessageDialog(ProjectCreateFrame.this, "创建项目失败");
                 return ;
@@ -125,7 +131,7 @@ public class ProjectCreateFrame extends JPanel {
                     model.removeRow(indexs[i]);
         	}
         });
-        delFunctionBtn.setBounds(713, 9, 63, 27);
+        delFunctionBtn.setBounds(665, 46, 98, 27);
         add(delFunctionBtn);
     }
 }
