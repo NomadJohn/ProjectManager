@@ -13,5 +13,6 @@ public class userLoginFrame extends JFrame {
         jtp.add("登录", new LoginMainFrame(userLoginFrame.this));
         jtp.add("注册", new StudentRegisterFrame());
         add(jtp);
+
     }
 }
