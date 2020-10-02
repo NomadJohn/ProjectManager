@@ -44,4 +44,10 @@ public class StudentDAO implements Loginable {
         int result = DBManager.update(String.format("DELETE FROM Students WHERE student_id = %s", studentId));
         return result > 0;
     }
+
+    public boolean update(StudentDTO stu) {
+        int count = DBManager.update(String.format("UPDATE Students SET " +
+                "student_name='%s', student_sex='%s', student_age=%d WHERE student_id=%d", stu.getName(), stu.getSex(), stu.getAge(), stu.getId()));
+        return count > 0;
+    }
 }
