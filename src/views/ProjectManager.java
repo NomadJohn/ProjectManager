@@ -3,10 +3,7 @@ package views;
     入口类
  */
 
-import com.formdev.flatlaf.FlatLightLaf;
-import views.Login.userLoginFrame;
-
-import javax.swing.*;
+import views.Login.UserLoginFrame;
 
 
 public class ProjectManager {
@@ -20,6 +17,6 @@ public class ProjectManager {
 //            //TODO exception
 //        }
 //        FlatLightLaf.install();
-        new userLoginFrame().setVisible(true);
+        new UserLoginFrame().setVisible(true);
     }
 }

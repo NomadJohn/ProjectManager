@@ -1,12 +1,9 @@
 package views.Manager.System;
 
 import DAO.ManagerDAO;
-import DTO.ManagerDTO;
 import DTO.StudentDTO;
 import uitls.Utils;
-import views.Login.LoginMainFrame;
-import views.Login.userLoginFrame;
-import views.Manager.ManagerFrame;
+import views.Login.UserLoginFrame;
 
 import javax.swing.*;
 import java.awt.GridLayout;
@@ -130,13 +127,17 @@ public class SystemMainFrame extends JPanel {
                 tip = ok ? "修改成功" : "修改失败";
                 JOptionPane.showMessageDialog(SystemMainFrame.this, tip);
                 if (ok) {
-                    Utils.GetManagerFrame().dispose();
-                    new userLoginFrame().setVisible(true);
+                    logout();
                 }
                 return;
             }
             JOptionPane.showMessageDialog(SystemMainFrame.this, tip);
         });
+    }
+
+    public void logout() {
+        Utils.GetManagerFrame().dispose();
+        new UserLoginFrame().setVisible(true);
     }
 
 
