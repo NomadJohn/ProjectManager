@@ -1,13 +1,17 @@
 package views.Student.Progress;
 
 import DAO.FunctionDAO;
+import DAO.StudentDAO;
 import DTO.FunctionDTO;
 import uitls.Utils;
+import views.Student.StudentFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /*
 1、标记已完成功能
@@ -70,15 +74,22 @@ public class ProgressManageFrame extends JPanel {
 		button.addActionListener(e -> {
 			changeCompleted(table_1, inCompletedModel, 1);
 		});
-		button.setBounds(325, 173, 126, 27);
+		button.setBounds(325, 172, 126, 27);
 		add(button);
 		
 		JButton button_1 = new JButton("移至未完成->");
 		button_1.addActionListener(arg0 -> {
 			changeCompleted(table, completedModel, 0);
 		});
-		button_1.setBounds(325, 242, 126, 27);
+		button_1.setBounds(325, 229, 126, 27);
 		add(button_1);
+		
+		JButton button_1_1 = new JButton("离开此项目");
+		button_1_1.addActionListener(arg0 -> {
+			StudentFrame.leaveProject(ProgressManageFrame.this);
+		});
+		button_1_1.setBounds(325, 284, 126, 27);
+		add(button_1_1);
 		loadFunctions();
 	}
 

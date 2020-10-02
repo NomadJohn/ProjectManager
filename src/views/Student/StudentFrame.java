@@ -18,6 +18,7 @@ import java.awt.*;
  */
 public class StudentFrame extends JFrame {
     private static JTabbedPane jtp;
+    private static StudentDAO StuDAO = new StudentDAO();
     StudentDTO userInfo = null;
     public StudentFrame() {
         userInfo = Utils.GetUserInfo();
@@ -52,13 +53,29 @@ public class StudentFrame extends JFrame {
         jtp.setEnabledAt(2, true);
     }
 
+    static public void setJtpIndexTo01() {
+        jtp.setSelectedIndex(1);
+        jtp.setEnabledAt(0, true);
+        jtp.setEnabledAt(1, true);
+        jtp.setEnabledAt(2, false);
+    }
+
     static public void joinProject(int studentId, int projectId, Component frame) {
-        if (new StudentDAO().joinProject(studentId, projectId)) {
+        if (StuDAO.joinProject(studentId, projectId)) {
             JOptionPane.showMessageDialog(frame, "加入成功");
             StudentFrame.setJtpIndexTo2();
             return;
         }
         JOptionPane.showMessageDialog(frame, "加入失败");
+    }
+
+    static public void leaveProject(Component frame) {
+       if (StuDAO.leaveProject(Utils.GetUserInfo().getId())) {
+           JOptionPane.showMessageDialog(frame, "离开成功");
+           StudentFrame.setJtpIndexTo01();
+           return;
+       }
+        JOptionPane.showMessageDialog(frame, "离开失败");
     }
 
     public static void main(String args[]) {
