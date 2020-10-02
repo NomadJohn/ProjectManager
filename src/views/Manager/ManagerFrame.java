@@ -20,7 +20,7 @@ public class ManagerFrame extends JFrame {
         setTitle("项目管理系统");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-
+        Utils.SetManagerFrame(ManagerFrame.this);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         tabbedPane.setBounds(0, 0, 482, 453);
@@ -99,8 +99,10 @@ public class ManagerFrame extends JFrame {
         getContentPane().add(cmp);
     }
 
+
     public static void main(String[] args) {
-        FlatLightLaf.install();
-        new ManagerFrame().setVisible(true);
+//        FlatLightLaf.install();
+        ManagerFrame mf = new ManagerFrame();
+        mf.setVisible(true);
     }
 }
