@@ -1,5 +1,6 @@
 package views.Student;
 
+import DAO.StudentDAO;
 import DTO.StudentDTO;
 //import com.formdev.flatlaf.FlatLightLaf;
 import uitls.Utils;
@@ -16,6 +17,7 @@ import java.awt.*;
 如果是组长，显示加入申请审核列表
  */
 public class StudentFrame extends JFrame {
+    private static JTabbedPane jtp;
     StudentDTO userInfo = null;
     public StudentFrame() {
         userInfo = Utils.GetUserInfo();
@@ -28,7 +30,7 @@ public class StudentFrame extends JFrame {
     }
 
     private JTabbedPane addProject() {
-        JTabbedPane jtp = new JTabbedPane();
+        jtp = new JTabbedPane();
         jtp.setFont(new Font("宋体", Font.PLAIN, 18));
         jtp.add("创建项目", new ProjectCreateFrame());
         jtp.add("加入项目", new ProjectJoinFrame(jtp));
@@ -41,6 +43,22 @@ public class StudentFrame extends JFrame {
             jtp.setEnabledAt(2, false);
         }
         return jtp;
+    }
+
+    static public void setJtpIndexTo2() {
+        jtp.setSelectedIndex(2);
+        jtp.setEnabledAt(0, false);
+        jtp.setEnabledAt(1, false);
+        jtp.setEnabledAt(2, true);
+    }
+
+    static public void joinProject(int studentId, int projectId, Component frame) {
+        if (new StudentDAO().joinProject(studentId, projectId)) {
+            JOptionPane.showMessageDialog(frame, "加入成功");
+            StudentFrame.setJtpIndexTo2();
+            return;
+        }
+        JOptionPane.showMessageDialog(frame, "加入失败");
     }
 
     public static void main(String args[]) {

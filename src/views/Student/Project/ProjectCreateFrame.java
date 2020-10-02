@@ -4,6 +4,8 @@ import DAO.FunctionDAO;
 import DAO.ProjectDAO;
 import DTO.FunctionDTO;
 import DTO.ProjectDTO;
+import uitls.Utils;
+import views.Student.StudentFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -119,6 +121,9 @@ public class ProjectCreateFrame extends JPanel {
             for (int i = functionCount-1; i >=0 ; i--) {
                 model.removeRow(i);
             }
+
+            int studentId = Utils.GetUserInfo().getId();
+            StudentFrame.joinProject(studentId, project_id, ProjectCreateFrame.this);
         });
         submitBtn.setBounds(340, 360, 113, 27);
         add(submitBtn);

@@ -21,11 +21,10 @@ public class FunctionDAO {
     public ArrayList<FunctionDTO> queryByProjectId(int projectId) {
         String sql = String.format("SELECT * FROM Functions WHERE project_id = %d", projectId);
         ArrayList<FunctionDTO> functions = new ArrayList<FunctionDTO>();
-        ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * From Functions "));
+        ArrayList<HashMap<String, String>> result = DBManager.query(sql);
         for (int i = 0; i < result.size(); i++) {
             int pid = Integer.parseInt(result.get(i).get("project_id"));
             int fid = Integer.parseInt(result.get(i).get("function_id"));
-            System.out.println(result.get(i).get("function_id"));
             String fName = result.get(i).get("function_name");
             String isCompleted = result.get(i).get("is_completed");
             functions.add(new FunctionDTO(fid, fName, pid, isCompleted));

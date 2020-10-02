@@ -6,6 +6,7 @@ import DAO.StudentDAO;
 import DTO.ProjectDTO;
 import uitls.DBManager;
 import uitls.Utils;
+import views.Student.StudentFrame;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -30,6 +31,7 @@ public class ProjectJoinFrame extends JPanel {
     private JTextField tSearch;
     DefaultTableModel model;
     ArrayList<ProjectDTO> projects;
+    ProjectDAO ProDAO = new ProjectDAO();
     /**
      * Create the panel.
      */
@@ -41,15 +43,7 @@ public class ProjectJoinFrame extends JPanel {
             public void actionPerformed(ActionEvent arg0) {
                 int studentId = Utils.GetUserInfo().getId();
                 int projectId = Integer.parseInt((String)tProjectList.getValueAt(tProjectList.getSelectedRow(), 0));
-                if (new StudentDAO().joinProject(studentId, projectId)) {
-                    JOptionPane.showMessageDialog(ProjectJoinFrame.this, "加入成功");
-                    jtp.setEnabledAt(0, false);
-                    jtp.setEnabledAt(1, false);
-                    jtp.setEnabledAt(2, true);
-                    jtp.setSelectedIndex(2);
-                    return;
-                }
-                JOptionPane.showMessageDialog(ProjectJoinFrame.this, "加入失败");
+                StudentFrame.joinProject(studentId, projectId, ProjectJoinFrame.this);
             }
         });
         submitBtn.setBounds(350, 382, 93, 23);
@@ -79,10 +73,10 @@ public class ProjectJoinFrame extends JPanel {
         tSearch.setColumns(10);
         
         JButton searchBtn = new JButton("搜索");
-        searchBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-
-        	}
+        searchBtn.addActionListener(arg0 -> {
+            String keyword = tSearch.getText();
+            removeAll();
+            loadProjectBySearch(keyword);
         });
         searchBtn.setBounds(226, 12, 87, 27);
         add(searchBtn);
@@ -121,8 +115,16 @@ public class ProjectJoinFrame extends JPanel {
         while (model.getRowCount() > 0) model.removeRow(0);
     }
 
-    public void loadProject() {
-        projects = new ProjectDAO().queryAll();
+    public void loadProjectAll() {
+        projects = ProDAO.queryAll();
+        for (ProjectDTO p: projects) {
+            Object[] obj = {p.getId(), p.getName(), p.getDesc(), p.getBegin(), p.getEnd() == null ? "未完成" : "已完成"};
+            model.addRow(obj);
+        }
+    }
+
+    public void loadProjectBySearch(String keyword) {
+        projects = ProDAO.queryByKeyword(keyword);
         for (ProjectDTO p: projects) {
             Object[] obj = {p.getId(), p.getName(), p.getDesc(), p.getBegin(), p.getEnd() == null ? "未完成" : "已完成"};
             model.addRow(obj);
@@ -131,7 +133,7 @@ public class ProjectJoinFrame extends JPanel {
 
     public void reLoadProject() {
         removeAll();
-        loadProject();
+        loadProjectAll();
     }
 
     private JFrame infoFrame(ProjectDTO project) {
