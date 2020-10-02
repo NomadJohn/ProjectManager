@@ -17,7 +17,7 @@ public class StudentMainFrame extends JPanel {
 
 
 
-        StudentListFrame list = new StudentListFrame();
+        StudentListFrame list = new StudentListFrame(tabbedPane);
         tabbedPane.addTab("学生列表", null, list, null);
     }
 }

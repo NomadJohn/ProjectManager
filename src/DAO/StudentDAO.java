@@ -19,8 +19,8 @@ public class StudentDAO implements Loginable {
         ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Students WHERE student_id = %d AND student_password = '%s'", StudentID, StudentPassword));
         if (result.size() > 0) {
             String projectIdStr = result.get(0).get("project_id");
-            int projectId = projectIdStr == null ? 0 : Integer.parseInt(projectIdStr);
-                    student = new StudentDTO(StudentID, result.get(0).get("student_name"), result.get(0).get("student_sex"),Integer.parseInt(result.get(0).get("student_age")), result.get(0).get("student_password"), projectId);
+            int projectId = projectIdStr.equals("null") ? 0 : Integer.parseInt(projectIdStr);
+            student = new StudentDTO(StudentID, result.get(0).get("student_name"), result.get(0).get("student_sex"), Integer.parseInt(result.get(0).get("student_age")), result.get(0).get("student_password"), projectId);
         }
         return student;
     }
@@ -34,8 +34,15 @@ public class StudentDAO implements Loginable {
         String sql = String.format("UPDATE Students SET project_id = %d WHERE student_id = %d", ProjectId, StudentId);
         return DBManager.update(sql) > 0;
     }
+
     public boolean deleteOne(int studentId) {
         int result = DBManager.update(String.format("DELETE FROM Students WHERE student_id = %s", studentId));
         return result > 0;
+    }
+
+    public boolean update(StudentDTO stu) {
+        int count = DBManager.update(String.format("UPDATE Students SET " +
+                "student_name='%s', student_sex='%s', student_age=%d WHERE student_id=%d", stu.getName(), stu.getSex(), stu.getAge(), stu.getId()));
+        return count > 0;
     }
 }

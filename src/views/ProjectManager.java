@@ -19,7 +19,7 @@ public class ProjectManager {
 //        {
 //            //TODO exception
 //        }
-        FlatLightLaf.install();
+//        FlatLightLaf.install();
         new userLoginFrame().setVisible(true);
     }
 }
