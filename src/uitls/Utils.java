@@ -72,6 +72,7 @@ public class Utils {
         JFrame frame = new JFrame();
         frame.setIconImage(icon);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setResizable(false);
         frame.setTitle("详细信息：" + project.getName());
         frame.setBounds(100, 100, 594, 383);
         JPanel contentPane = new JPanel();

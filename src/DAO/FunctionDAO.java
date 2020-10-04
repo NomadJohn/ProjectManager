@@ -40,7 +40,8 @@ public class FunctionDAO {
         for (FunctionDTO f:functions) {
             str += f.getName() + "、";
         }
-        return str;
+
+        return str != "" ? str.substring(0, str.length()-1) : "无";
     }
 
     public boolean setIsCompletedFunction(int function_id, int isCompleted) {
