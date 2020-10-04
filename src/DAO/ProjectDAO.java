@@ -15,7 +15,7 @@ public class ProjectDAO {
     public int update(int project_id, String project_name, boolean end) {
         String sql;
         sql = String.format("UPDATE Projects SET project_name='%s', project_end=%s WHERE project_id='%s'", project_name, end ? "NOW()" : "NULL", project_id);
-        return  DBManager.update(sql);
+        return DBManager.update(sql);
     }
 
     public ArrayList<ProjectDTO> queryAll() {
@@ -43,8 +43,14 @@ public class ProjectDAO {
         }
         return projects;
     }
-    public ArrayList<HashMap<String, String>>  selectAll() {
+
+    public ArrayList<HashMap<String, String>> selectAll() {
         ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Projects"));
+        return result;
+    }
+
+    public ArrayList<HashMap<String, String>> selectOne(int projectId) {
+        ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Projects WHERE Project_id=" + projectId));
         return result;
     }
 

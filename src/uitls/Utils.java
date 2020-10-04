@@ -118,7 +118,9 @@ public class Utils {
         contentPane.add(lbProjectName);
         frame.setContentPane(contentPane);
         tProjectDesc.setEditable(false);
+        tProjectDesc.setLineWrap(true);
         tProjectFunction.setEditable(false);
+        tProjectFunction.setLineWrap(true);
         lbProjectName.setText(project.getName());
         lbProjectBegin.setText(project.getBegin().toString());
         tProjectDesc.setText(project.getDesc());

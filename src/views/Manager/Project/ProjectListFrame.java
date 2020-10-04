@@ -200,8 +200,8 @@ public class ProjectListFrame extends JPanel {
         reloadProjects();
     }
 
-    public void searchByProjectId(int studentId) {
-        ArrayList<HashMap<String, String>> result = new ProjectDAO().selectAll();
+    public void searchByProjectId(int projectId) {
+        ArrayList<HashMap<String, String>> result = new ProjectDAO().selectOne(projectId);
         if (result.size() > 0) {
             removeAllProjects();
             addRowByHashMap(result.get(0));
