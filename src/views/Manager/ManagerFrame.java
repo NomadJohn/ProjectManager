@@ -85,6 +85,8 @@ public class ManagerFrame extends JFrame {
             System.exit(0);
         });
         mnh.add(menuItem_1_1);
+        setLocationRelativeTo(null);
+        setIconImage(Utils.icon);
 //        initMenu();
     }
 

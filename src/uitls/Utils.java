@@ -9,6 +9,7 @@ import views.Student.StudentFrame;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class Utils {
     static public JTextField addWithLabel(JPanel panel, String lb) {
@@ -64,9 +65,14 @@ public class Utils {
         UserLoginFrame u = new UserLoginFrame();
         u.setVisible(true);
     }
+
+    public static Image icon = Toolkit.getDefaultToolkit().getImage("image/banner.png");
+
     public static JFrame getInfoFrame(ProjectDTO project) {
         JFrame frame = new JFrame();
+        frame.setIconImage(icon);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setTitle("详细信息：" + project.getName());
         frame.setBounds(100, 100, 594, 383);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
