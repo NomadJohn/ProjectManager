@@ -63,4 +63,9 @@ public class StudentDAO implements Loginable {
         }
         return 0;
     }
+
+    public boolean setPassword(int studentId, String newPassword) {
+        int res = DBManager.update(String.format("UPDATE Students SET student_password='%s' WHERE student_id=%d", newPassword, studentId));
+        return res > 0;
+    }
 }

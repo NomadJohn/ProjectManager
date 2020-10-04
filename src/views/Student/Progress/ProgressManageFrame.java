@@ -94,7 +94,6 @@ public class ProgressManageFrame extends JPanel {
 
 		JTabbedPane jtp = StudentFrame.getJtp();
 		jtp.addChangeListener(changeEvent -> {
-			System.out.println(jtp.getSelectedIndex());
 			if (jtp.getSelectedIndex() == 2) {
 				reloadFunctions();
 			}
@@ -119,7 +118,6 @@ public class ProgressManageFrame extends JPanel {
 				inCompletedModel.addRow(obj);
 		}
 		setProgressBar(completedCount);
-		System.out.println(functions);
 	}
 
 	private void rmModelAll() {

@@ -55,7 +55,9 @@ public class Utils {
     public static void SetManagerFrame(ManagerFrame mf) {
         managerFrame = mf;
     }
-
+    public static boolean isManager() {
+        return managerFrame != null;
+    }
     public static void Logout() {
         if (managerFrame != null) managerFrame.dispose();
         if (studentFrame != null) studentFrame.dispose();

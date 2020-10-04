@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 public class FunctionDAO {
     public boolean insertMore(FunctionDTO[] functions) {
+        if (functions.length <= 0)
+            return true;
         String sql = "INSERT INTO Functions(project_id, function_name) VALUES";
         for (FunctionDTO f:functions) {
             sql += String.format("(%d,'%s'),", f.getProjectId(), f.getName());

@@ -73,7 +73,7 @@ public class StudentInfoFrame extends JPanel {
 			Utils.Logout();
 		});
 		button.setFont(new Font("宋体", Font.PLAIN, 20));
-		button.setBounds(331, 349, 120, 42);
+		button.setBounds(331, 328, 120, 42);
 		add(button);
 
 
@@ -84,7 +84,6 @@ public class StudentInfoFrame extends JPanel {
 
 		JTabbedPane jtp = StudentFrame.getJtp();
 		jtp.addChangeListener(changeEvent -> {
-			System.out.println(jtp.getSelectedIndex());
 			if (jtp.getSelectedIndex() == 3) {
 				reSetProjectName();
 			}

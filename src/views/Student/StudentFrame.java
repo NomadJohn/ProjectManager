@@ -8,6 +8,7 @@ import views.Student.Progress.ProgressManageFrame;
 import views.Student.Project.ProjectCreateFrame;
 import views.Student.Project.ProjectJoinFrame;
 import views.Student.StudentInfo.StudentInfoFrame;
+import views.Student.StudentInfo.StudentInfoManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +38,7 @@ public class StudentFrame extends JFrame {
         jtp.add("创建项目", new ProjectCreateFrame());
         jtp.add("加入项目", new ProjectJoinFrame(jtp));
         jtp.add("项目进度", new ProgressManageFrame());
-        jtp.add("用户信息", new StudentInfoFrame());
+        jtp.add("用户信息", new StudentInfoManager());
         if (Utils.GetUserInfo().getProjectId() != 0)
               setJtpIndexTo2();
         else

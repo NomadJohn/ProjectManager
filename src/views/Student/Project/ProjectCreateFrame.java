@@ -61,6 +61,7 @@ public class ProjectCreateFrame extends JPanel {
         add(scrollPane);
 
         JTextArea tProjectDesc = new JTextArea();
+        tProjectDesc.setLineWrap(true);
         scrollPane.setViewportView(tProjectDesc);
 
         tProjectFunction = new JTextField();
@@ -98,6 +99,7 @@ public class ProjectCreateFrame extends JPanel {
         JButton submitBtn = new JButton("\u521B\u5EFA\u9879\u76EE");
         submitBtn.setFont(new Font("宋体", Font.PLAIN, 18));
         submitBtn.addActionListener(e -> {
+            System.out.println(tProjectDesc.getText());
             int project_id = new ProjectDAO().insert(new ProjectDTO(tProjectName.getText(), tProjectDesc.getText(), Timestamp.valueOf(LocalDateTime.now())));
             if (project_id <= 0) {
                 JOptionPane.showMessageDialog(ProjectCreateFrame.this, "创建项目失败");
@@ -123,6 +125,8 @@ public class ProjectCreateFrame extends JPanel {
                 model.removeRow(i);
             }
 
+            if (Utils.isManager())
+                return;
             int studentId = Utils.GetUserInfo().getId();
             StudentFrame.joinProject(studentId, project_id, ProjectCreateFrame.this);
         });
