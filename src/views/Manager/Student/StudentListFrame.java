@@ -86,12 +86,12 @@ public class StudentListFrame extends JPanel {
 
         tAge = new JTextField();
         tAge.setColumns(10);
-        tAge.setBounds(433, 476, 46, 24);
+        tAge.setBounds(433, 476, 55, 24);
         add(tAge);
 
         JComboBox tSex = new JComboBox();
         tSex.setModel(new DefaultComboBoxModel(new String[]{"男", "女"}));
-        tSex.setBounds(433, 429, 46, 27);
+        tSex.setBounds(433, 429, 55, 27);
         add(tSex);
 
         JLabel label_1 = new JLabel("学号");

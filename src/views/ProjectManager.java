@@ -10,6 +10,8 @@ import views.Login.UserLoginFrame;
 public class ProjectManager {
     public static void main(String[] args) {
         FlatLightLaf.install();
-        new UserLoginFrame().setVisible(true);
+        UserLoginFrame loginFrame = new UserLoginFrame();
+        loginFrame.setLocationRelativeTo(null);
+        loginFrame.setVisible(true);
     }
 }
