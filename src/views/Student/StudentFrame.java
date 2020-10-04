@@ -40,7 +40,7 @@ public class StudentFrame extends JFrame {
         jtp.add("创建项目", new ProjectCreateFrame());
         jtp.add("加入项目", new ProjectJoinFrame(jtp));
         jtp.add("项目进度", new ProgressManageFrame());
-        jtp.add("用户信息", new StudentInfoManager());
+        jtp.add("个人中心", new StudentInfoManager());
         if (Utils.GetUserInfo().getProjectId() != 0)
             setJtpIndexTo2();
         else
