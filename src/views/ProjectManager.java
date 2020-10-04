@@ -13,5 +13,6 @@ public class ProjectManager {
         UserLoginFrame loginFrame = new UserLoginFrame();
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setVisible(true);
+        System.out.println("test");
     }
 }
