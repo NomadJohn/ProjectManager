@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.awt.Font;
 
 /*
 1、显示所有可加入的项目
@@ -39,6 +40,7 @@ public class ProjectJoinFrame extends JPanel {
         setLayout(null);
 
         JButton submitBtn = new JButton("\u52A0\u5165\u9879\u76EE");
+        submitBtn.setFont(new Font("宋体", Font.PLAIN, 18));
         submitBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 int studentId = Utils.GetUserInfo().getId();
@@ -46,11 +48,11 @@ public class ProjectJoinFrame extends JPanel {
                 StudentFrame.joinProject(studentId, projectId, ProjectJoinFrame.this);
             }
         });
-        submitBtn.setBounds(350, 382, 93, 23);
+        submitBtn.setBounds(341, 360, 105, 36);
         add(submitBtn);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(14, 49, 764, 320);
+        scrollPane.setBounds(14, 49, 764, 297);
         add(scrollPane);
 
         tProjectList = new JTable(){ public boolean isCellEditable(int row, int column) { return false; }};

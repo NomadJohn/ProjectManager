@@ -91,6 +91,14 @@ public class ProgressManageFrame extends JPanel {
 		button_1_1.setBounds(325, 284, 126, 27);
 		add(button_1_1);
 		loadFunctions();
+
+		JTabbedPane jtp = StudentFrame.getJtp();
+		jtp.addChangeListener(changeEvent -> {
+			System.out.println(jtp.getSelectedIndex());
+			if (jtp.getSelectedIndex() == 2) {
+				reloadFunctions();
+			}
+		});
 	}
 
 	private void setProgressBar(int completedCount) {
@@ -101,7 +109,7 @@ public class ProgressManageFrame extends JPanel {
 
 	private void loadFunctions() {
 		int completedCount = 0;
-		functions = FuncDAO.queryByProjectId(Utils.GetUserInfo().getProjectId());
+		functions = FuncDAO.queryByProjectId(new StudentDAO().getStuProjectId(Utils.GetUserInfo().getId()));
 		for(FunctionDTO f:functions) {
 			Object[] obj = {f.getId(), f.getName()};
 			if (f.getIsCompleted().equals("1")) {
@@ -111,6 +119,7 @@ public class ProgressManageFrame extends JPanel {
 				inCompletedModel.addRow(obj);
 		}
 		setProgressBar(completedCount);
+		System.out.println(functions);
 	}
 
 	private void rmModelAll() {

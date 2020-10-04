@@ -96,6 +96,7 @@ public class ProjectCreateFrame extends JPanel {
         add(addFunctionBtn);
 
         JButton submitBtn = new JButton("\u521B\u5EFA\u9879\u76EE");
+        submitBtn.setFont(new Font("宋体", Font.PLAIN, 18));
         submitBtn.addActionListener(e -> {
             int project_id = new ProjectDAO().insert(new ProjectDTO(tProjectName.getText(), tProjectDesc.getText(), Timestamp.valueOf(LocalDateTime.now())));
             if (project_id <= 0) {
@@ -125,7 +126,7 @@ public class ProjectCreateFrame extends JPanel {
             int studentId = Utils.GetUserInfo().getId();
             StudentFrame.joinProject(studentId, project_id, ProjectCreateFrame.this);
         });
-        submitBtn.setBounds(340, 360, 113, 27);
+        submitBtn.setBounds(351, 351, 113, 27);
         add(submitBtn);
         
         JButton delFunctionBtn = new JButton("删除");

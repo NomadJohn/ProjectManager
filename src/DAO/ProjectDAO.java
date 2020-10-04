@@ -48,7 +48,15 @@ public class ProjectDAO {
         return result;
     }
 
+    public String getProjectNameById(int projectId) {
+        String sql = String.format("SELECT project_name From Projects WHERE project_id = %d;", projectId);
+        ArrayList<HashMap<String, String>> result = DBManager.query(sql);
+        if (result.size() == 0)
+            return "";
+        return result.get(0).get("project_name");
+    }
+
     public static void main(String[] args) {
-        new ProjectDAO().queryByKeyword("t");
+        new ProjectDAO().getProjectNameById(16);
     }
 }

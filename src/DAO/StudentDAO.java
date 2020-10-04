@@ -54,4 +54,13 @@ public class StudentDAO implements Loginable {
         ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Students"));
         return result;
     }
+
+    public int getStuProjectId(int StudentID) {
+        ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT project_id FROM Students WHERE student_id = %d", StudentID));
+        if (result.size() > 0) {
+            String projectIdStr = result.get(0).get("project_id");
+            return projectIdStr == null ? 0 : Integer.parseInt(projectIdStr);
+        }
+        return 0;
+    }
 }

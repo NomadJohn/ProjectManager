@@ -7,6 +7,7 @@ import uitls.Utils;
 import views.Student.Progress.ProgressManageFrame;
 import views.Student.Project.ProjectCreateFrame;
 import views.Student.Project.ProjectJoinFrame;
+import views.Student.StudentInfo.StudentInfoFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,13 +37,12 @@ public class StudentFrame extends JFrame {
         jtp.add("创建项目", new ProjectCreateFrame());
         jtp.add("加入项目", new ProjectJoinFrame(jtp));
         jtp.add("项目进度", new ProgressManageFrame());
-        if (Utils.GetUserInfo().getProjectId() != 0) {
-            jtp.setEnabledAt(0, false);
-            jtp.setEnabledAt(1, false);
-            jtp.setSelectedIndex(2);
-        }else {
-            jtp.setEnabledAt(2, false);
-        }
+        jtp.add("用户信息", new StudentInfoFrame());
+        if (Utils.GetUserInfo().getProjectId() != 0)
+              setJtpIndexTo2();
+        else
+            setJtpIndexTo01();
+
         return jtp;
     }
 
@@ -64,6 +64,7 @@ public class StudentFrame extends JFrame {
         if (StuDAO.joinProject(studentId, projectId)) {
             JOptionPane.showMessageDialog(frame, "加入成功");
             StudentFrame.setJtpIndexTo2();
+
             return;
         }
         JOptionPane.showMessageDialog(frame, "加入失败");
@@ -76,6 +77,10 @@ public class StudentFrame extends JFrame {
            return;
        }
         JOptionPane.showMessageDialog(frame, "离开失败");
+    }
+
+    static public JTabbedPane getJtp() {
+        return jtp;
     }
 
     public static void main(String args[]) {
