@@ -21,12 +21,12 @@ public class StudentFrame extends JFrame {
     private static StudentDAO StuDAO = new StudentDAO();
     StudentDTO userInfo = null;
     public StudentFrame() {
+        Utils.setStudentFrame(StudentFrame.this);
         userInfo = Utils.GetUserInfo();
         this.setTitle("项目管理");
         this.setSize(810, 480);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         this.setContentPane(addProject());
     }
 

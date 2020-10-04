@@ -48,22 +48,43 @@ public class ManagerFrame extends JFrame {
         menuBar.add(mns);
 
         JMenuItem menuItem_3 = new JMenuItem("学生管理");
+        menuItem_3.addActionListener(arg -> {
+            tabbedPane.setSelectedIndex(0);
+        });
         mns.add(menuItem_3);
 
         JMenuItem menuItem_2 = new JMenuItem("项目管理");
+        menuItem_2.addActionListener(arg -> {
+            tabbedPane.setSelectedIndex(1);
+        });
         mns.add(menuItem_2);
 
         JMenuItem menuItem_4 = new JMenuItem("系统信息");
+        menuItem_4.addActionListener(arg -> {
+            tabbedPane.setSelectedIndex(2);
+        });
         mns.add(menuItem_4);
 
         JMenu mnh = new JMenu("帮助(H)");
         menuBar.add(mnh);
 
-        JMenuItem menuItem_1 = new JMenuItem("退出系统");
+        JMenuItem menuItem_1 = new JMenuItem("退出");
+        menuItem_1.addActionListener(arg -> {
+            Utils.Logout();
+        });
         mnh.add(menuItem_1);
 
         JMenuItem menuItem = new JMenuItem("关于");
+        menuItem.addActionListener(arg -> {
+            JOptionPane.showMessageDialog(ManagerFrame.this, "大牛项目管理系统", "关于：", JOptionPane.INFORMATION_MESSAGE);
+        });
         mnh.add(menuItem);
+
+        JMenuItem menuItem_1_1 = new JMenuItem("关闭软件");
+        menuItem_1_1.addActionListener(arg -> {
+            System.exit(0);
+        });
+        mnh.add(menuItem_1_1);
 //        initMenu();
     }
 

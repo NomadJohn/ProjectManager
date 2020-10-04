@@ -50,4 +50,8 @@ public class StudentDAO implements Loginable {
                 "student_name='%s', student_sex='%s', student_age=%d WHERE student_id=%d", stu.getName(), stu.getSex(), stu.getAge(), stu.getId()));
         return count > 0;
     }
+    public ArrayList<HashMap<String, String>>  selectAll() {
+        ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Students"));
+        return result;
+    }
 }

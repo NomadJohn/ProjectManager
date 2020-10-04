@@ -1,10 +1,7 @@
 package views.Manager.Project;
 
 import views.Student.Project.ProjectCreateFrame;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class ProjectMainFrame extends JPanel {
@@ -25,6 +22,8 @@ public class ProjectMainFrame extends JPanel {
     	
     	JPanel list = new JPanel();
     	tabbedPane.addTab("项目列表", null, list, null);
-
+		list.setLayout(new GridLayout(1,0,0,0));
+		ProjectListFrame pl = new ProjectListFrame(tabbedPane);
+		list.add(pl);
     }
 }

@@ -12,6 +12,12 @@ public class ProjectDAO {
         return DBManager.updateCallId(String.format("INSERT INTO Projects(project_name, project_desc, project_begin) VALUES ('%s', '%s', '%s')", project.getName(), project.getDesc(), project.getBegin().toString()));
     }
 
+    public int update(int project_id, String project_name, boolean end) {
+        String sql;
+        sql = String.format("UPDATE Projects SET project_name='%s', project_end=%s WHERE project_id='%s'", project_name, end ? "NOW()" : "NULL", project_id);
+        return  DBManager.update(sql);
+    }
+
     public ArrayList<ProjectDTO> queryAll() {
         ArrayList<ProjectDTO> projects = new ArrayList<ProjectDTO>();
         ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * From Projects "));
@@ -36,6 +42,10 @@ public class ProjectDAO {
             projects.add(new ProjectDTO(projectId, projectName, projectDesc, projectBegin, projectEnd));
         }
         return projects;
+    }
+    public ArrayList<HashMap<String, String>>  selectAll() {
+        ArrayList<HashMap<String, String>> result = DBManager.query(String.format("SELECT * FROM Projects"));
+        return result;
     }
 
     public static void main(String[] args) {

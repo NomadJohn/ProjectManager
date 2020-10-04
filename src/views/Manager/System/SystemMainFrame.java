@@ -1,12 +1,16 @@
 package views.Manager.System;
 
 import DAO.ManagerDAO;
+import DAO.ProjectDAO;
+import DAO.StudentDAO;
 import DTO.StudentDTO;
 import uitls.Utils;
 import views.Login.UserLoginFrame;
 
 import javax.swing.*;
 import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.Color;
 
 public class SystemMainFrame extends JPanel {
     private JPasswordField tCurrentPassword;
@@ -14,9 +18,10 @@ public class SystemMainFrame extends JPanel {
     private JPasswordField tNewPasswordConfirm;
     private JTextField tManagerName;
     private StudentDTO user;
+    private final JButton bLogout = new JButton("退出系统");
 
     public SystemMainFrame() {
-        setLayout(new GridLayout(1, 0, 0, 0));
+        setLayout(new GridLayout(0, 1, 0, 0));
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         add(tabbedPane);
@@ -26,39 +31,32 @@ public class SystemMainFrame extends JPanel {
         ManagerInfo.setLayout(null);
 
         JLabel label_2 = new JLabel("编号");
-        label_2.setBounds(59, 13, 30, 18);
+        label_2.setFont(new Font("微软雅黑", Font.PLAIN, 32));
+        label_2.setBounds(177, 9, 72, 55);
         ManagerInfo.add(label_2);
 
         JLabel label_2_1_1 = new JLabel("");
         label_2_1_1.setBounds(59, 75, 30, 18);
         ManagerInfo.add(label_2_1_1);
 
-        JLabel label_2_1_1_1 = new JLabel("总学生计数");
-        label_2_1_1_1.setBounds(59, 106, 75, 18);
-        ManagerInfo.add(label_2_1_1_1);
-
-        JLabel label_2_1_1_1_1 = new JLabel("总项目计数");
-        label_2_1_1_1_1.setBounds(59, 151, 82, 18);
-        ManagerInfo.add(label_2_1_1_1_1);
-
         JLabel lbCountStudent = new JLabel("0");
-        lbCountStudent.setBounds(150, 106, 72, 18);
+        lbCountStudent.setFont(new Font("宋体", Font.PLAIN, 32));
+        lbCountStudent.setBounds(279, 172, 72, 38);
         ManagerInfo.add(lbCountStudent);
 
-        JLabel lbProjectCount = new JLabel("0");
-        lbProjectCount.setBounds(150, 151, 72, 18);
-        ManagerInfo.add(lbProjectCount);
+        JLabel lbCountProject = new JLabel("0");
+        lbCountProject.setFont(new Font("宋体", Font.PLAIN, 32));
+        lbCountProject.setBounds(279, 237, 72, 31);
+        ManagerInfo.add(lbCountProject);
 
         JLabel lbManagerId = new JLabel("*");
-        lbManagerId.setBounds(113, 13, 152, 18);
+        lbManagerId.setFont(new Font("微软雅黑", Font.BOLD, 32));
+        lbManagerId.setBounds(279, 13, 152, 47);
         ManagerInfo.add(lbManagerId);
 
-        JLabel label_2_1 = new JLabel("账号");
-        label_2_1.setBounds(59, 44, 30, 18);
-        ManagerInfo.add(label_2_1);
-
         JLabel lbManagerName = new JLabel("*");
-        lbManagerName.setBounds(113, 44, 152, 18);
+        lbManagerName.setFont(new Font("微软雅黑", Font.PLAIN, 32));
+        lbManagerName.setBounds(279, 75, 500, 38);
         ManagerInfo.add(lbManagerName);
 
         JPanel resetPassword = new JPanel();
@@ -109,8 +107,31 @@ public class SystemMainFrame extends JPanel {
         tManagerName.setText(user.getName());
         lbManagerId.setText(String.valueOf(user.getId()));
         lbManagerName.setText(user.getName());
-        lbCountStudent.setText("123");
-        lbProjectCount.setText("442");
+        int countStudent, countProject;
+        countStudent = new StudentDAO().selectAll().size();
+        countProject = new ProjectDAO().selectAll().size();
+        lbCountStudent.setText(String.valueOf(countStudent));
+        lbCountProject.setText(String.valueOf(countProject));
+        
+        JLabel label_2_1 = new JLabel("用户");
+        label_2_1.setFont(new Font("微软雅黑", Font.PLAIN, 32));
+        label_2_1.setBounds(177, 69, 72, 55);
+        ManagerInfo.add(label_2_1);
+        
+        JLabel label_2_2 = new JLabel("项目总计数");
+        label_2_2.setForeground(Color.DARK_GRAY);
+        label_2_2.setFont(new Font("微软雅黑", Font.PLAIN, 32));
+        label_2_2.setBounds(80, 163, 169, 55);
+        ManagerInfo.add(label_2_2);
+        
+        JLabel label_2_2_1 = new JLabel("用户总计数");
+        label_2_2_1.setForeground(Color.DARK_GRAY);
+        label_2_2_1.setFont(new Font("微软雅黑", Font.PLAIN, 32));
+        label_2_2_1.setBounds(80, 213, 169, 55);
+        ManagerInfo.add(label_2_2_1);
+        bLogout.setBounds(279, 295, 162, 66);
+        ManagerInfo.add(bLogout);
+        bLogout.setFont(new Font("宋体", Font.PLAIN, 24));
 
         bSubmit.addActionListener(arg -> {
             String currentPassword = tCurrentPassword.getText();
@@ -127,18 +148,14 @@ public class SystemMainFrame extends JPanel {
                 tip = ok ? "修改成功" : "修改失败";
                 JOptionPane.showMessageDialog(SystemMainFrame.this, tip);
                 if (ok) {
-                    logout();
+                    Utils.Logout();
                 }
                 return;
             }
             JOptionPane.showMessageDialog(SystemMainFrame.this, tip);
         });
+        bLogout.addActionListener(arg -> {
+            Utils.Logout();
+        });
     }
-
-    public void logout() {
-        Utils.GetManagerFrame().dispose();
-        new UserLoginFrame().setVisible(true);
-    }
-
-
 }

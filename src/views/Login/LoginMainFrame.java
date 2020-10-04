@@ -80,7 +80,7 @@ public class LoginMainFrame extends JPanel {
 //                    JOptionPane.showMessageDialog(LoginMainFrame.this, "登录成功");
                     //登录成功后的处理
                     mainFrame.dispose();
-                    Utils.SetUserInfo(userInfo);
+                    Utils.setUserInfo(userInfo);
                     entity.GetFrame().setVisible(true);
                     return;
                 }

@@ -85,7 +85,7 @@ public class ProjectJoinFrame extends JPanel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 if(mouseEvent.getClickCount() == 2) {
-                    infoFrame(projects.get(tProjectList.getSelectedRow())).setVisible(true);
+                    Utils.getInfoFrame(projects.get(tProjectList.getSelectedRow())).setVisible(true);
                 }
             }
 
@@ -136,59 +136,5 @@ public class ProjectJoinFrame extends JPanel {
         loadProjectAll();
     }
 
-    private JFrame infoFrame(ProjectDTO project) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setBounds(100, 100, 594, 383);
-        JPanel contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        frame.setContentPane(contentPane);
-        contentPane.setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("项目名称");
-        lblNewLabel.setBounds(14, 13, 72, 18);
-        contentPane.add(lblNewLabel);
-
-        JLabel lblNewLabel_1 = new JLabel("项目描述");
-        lblNewLabel_1.setBounds(14, 44, 72, 18);
-        contentPane.add(lblNewLabel_1);
-
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(100, 44, 358, 114);
-        contentPane.add(scrollPane);
-
-        JTextArea tProjectDesc = new JTextArea();
-        scrollPane.setViewportView(tProjectDesc);
-
-        JLabel lblNewLabel_2 = new JLabel("项目功能");
-        lblNewLabel_2.setBounds(14, 186, 72, 18);
-        contentPane.add(lblNewLabel_2);
-
-        JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(100, 179, 358, 70);
-        contentPane.add(scrollPane_1);
-
-        JTextArea tProjectFunction = new JTextArea();
-        scrollPane_1.setViewportView(tProjectFunction);
-
-        JLabel lblNewLabel_3 = new JLabel("创建时间");
-        lblNewLabel_3.setBounds(14, 278, 72, 18);
-        contentPane.add(lblNewLabel_3);
-
-        JLabel lbProjectBegin = new JLabel("");
-        lbProjectBegin.setBounds(105, 278, 353, 18);
-        contentPane.add(lbProjectBegin);
-
-        JLabel lbProjectName = new JLabel("");
-        lbProjectName.setBounds(105, 13, 353, 18);
-        contentPane.add(lbProjectName);
-        frame.setContentPane(contentPane);
-
-        lbProjectName.setText(project.getName());
-        lbProjectBegin.setText(project.getBegin().toString());
-        tProjectDesc.setText(project.getDesc());
-        tProjectFunction.setText(new FunctionDAO().queryByProjectIdToString(Integer.parseInt(project.getId())));
-
-        return frame;
-    }
 }
