@@ -21,6 +21,7 @@ public class StudentFrame extends JFrame {
     private static JTabbedPane jtp;
     private static StudentDAO StuDAO = new StudentDAO();
     StudentDTO userInfo = null;
+
     public StudentFrame() {
         Utils.setStudentFrame(StudentFrame.this);
         userInfo = Utils.GetUserInfo();
@@ -29,6 +30,7 @@ public class StudentFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(addProject());
+        setIconImage(Utils.icon);
     }
 
     private JTabbedPane addProject() {
@@ -39,7 +41,7 @@ public class StudentFrame extends JFrame {
         jtp.add("项目进度", new ProgressManageFrame());
         jtp.add("用户信息", new StudentInfoFrame());
         if (Utils.GetUserInfo().getProjectId() != 0)
-              setJtpIndexTo2();
+            setJtpIndexTo2();
         else
             setJtpIndexTo01();
 
@@ -71,11 +73,11 @@ public class StudentFrame extends JFrame {
     }
 
     static public void leaveProject(Component frame) {
-       if (StuDAO.leaveProject(Utils.GetUserInfo().getId())) {
-           JOptionPane.showMessageDialog(frame, "离开成功");
-           StudentFrame.setJtpIndexTo01();
-           return;
-       }
+        if (StuDAO.leaveProject(Utils.GetUserInfo().getId())) {
+            JOptionPane.showMessageDialog(frame, "离开成功");
+            StudentFrame.setJtpIndexTo01();
+            return;
+        }
         JOptionPane.showMessageDialog(frame, "离开失败");
     }
 
