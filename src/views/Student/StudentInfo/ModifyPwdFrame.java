@@ -56,6 +56,7 @@ public class ModifyPwdFrame extends JPanel {
 			String newPwd = tNewPwd.getText();
 			if(!tOldPwd.getText().equals(userInfo.getPassword())) {
 				JOptionPane.showMessageDialog(ModifyPwdFrame.this, "原密码错误");
+				clearText();
 				return;
 			}
 
@@ -66,7 +67,14 @@ public class ModifyPwdFrame extends JPanel {
 					return;
 				}
 				JOptionPane.showMessageDialog(ModifyPwdFrame.this, "修改密码失败");
+				clearText();
 			}
 		});
+	}
+
+	private void clearText() {
+		tOldPwd.setText(null);
+		tNewPwd.setText(null);
+		tNewPwdConfirm.setText(null);
 	}
 }
